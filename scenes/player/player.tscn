@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl657vqa1tt2j"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_fcplj"]
+[ext_resource type="Texture2D" uid="uid://irdngr2v1aws" path="res://graphics/player/player.png" id="1_ofm0d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j100a"]
+radius = 66.0
+
+[sub_resource type="GDScript" id="GDScript_bqja5"]
+script/source = "extends Timer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	pass
+"
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(677, 485)
+script = ExtResource("1_fcplj")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(-3, -1)
+rotation = 1.5708
+texture = ExtResource("1_ofm0d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-38, -1)
+shape = SubResource("CircleShape2D_j100a")
+
+[node name="LaserCooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+script = SubResource("GDScript_bqja5")
+
+[node name="GrenadeCooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="LaserStartPositions" type="Node2D" parent="."]
+rotation = 1.5708
+
+[node name="Marker2D" type="Marker2D" parent="LaserStartPositions"]
+position = Vector2(15, -98)
+
+[node name="Marker2D2" type="Marker2D" parent="LaserStartPositions"]
+position = Vector2(25, -97)
+
+[node name="Marker2D3" type="Marker2D" parent="LaserStartPositions"]
+position = Vector2(5, -97)
+
+[connection signal="timeout" from="LaserCooldown" to="." method="_on_laser_cooldown_timeout"]
+[connection signal="timeout" from="GrenadeCooldown" to="." method="_on_grenade_cooldown_timeout"]

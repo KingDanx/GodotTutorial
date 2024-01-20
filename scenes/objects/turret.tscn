@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpx3sxxciwju0"]
+
+[ext_resource type="Texture2D" uid="uid://ddy3jg4lhv51m" path="res://graphics/car/turret.png" id="1_fnsdd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j2nik"]
+radius = 61.88
+height = 249.42
+
+[node name="Turret" type="StaticBody2D"]
+position = Vector2(64, 535)
+rotation = 0.812411
+scale = Vector2(0.5, 0.5)
+
+[node name="TurretSprite" type="Sprite2D" parent="."]
+position = Vector2(69.003, 92.9225)
+texture = ExtResource("1_fnsdd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(71.6012, 84.3639)
+scale = Vector2(1, 0.94498)
+shape = SubResource("CapsuleShape2D_j2nik")
